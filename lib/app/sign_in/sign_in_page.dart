@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_app/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker_flutter_app/app/sign_in/social_sign_in_button.dart';
-import 'package:time_tracker_flutter_app/common_widgets/custom_raised_button.dart';
 
 class SignInPage extends StatelessWidget {
   @override
@@ -10,6 +9,7 @@ class SignInPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Time tracker'),
         elevation: 2.0,
+        centerTitle: true,
       ),
       body: _buildContent(),
       backgroundColor: Colors.grey[200],
@@ -41,7 +41,8 @@ class SignInPage extends StatelessWidget {
               onPressed: () {},
             ),
             SizedBox(height: 8.0),
-            SignInButton(
+            SocialSignInButton(
+              assetName: 'images/facebook-logo.png',
               text: 'Sign in with Facebook',
               textColor: Colors.white,
               color: Color(0xFF334D92),
