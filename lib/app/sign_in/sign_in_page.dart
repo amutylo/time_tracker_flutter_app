@@ -32,6 +32,22 @@ class SignInPage extends StatelessWidget {
               )
               ),
             SizedBox(height: 48.0),
+            CustomRaisedButton(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Image.asset('images/google-logo.png'),
+                  Text('Sign in with Google'),
+                  Opacity(
+                    opacity: 0,
+                    child: Image.asset('images/google-logo.png'),
+                  ),
+                ]
+              ),
+              color: Colors.white,
+              onPressed: () {},
+            ),
+            SizedBox(height: 8.0),
             SignInButton(
               text: 'Sign in with Google',
               textColor: Colors.black87,
@@ -56,10 +72,10 @@ class SignInPage extends StatelessWidget {
             Text(
               'or',
               style: TextStyle(fontSize: 14.0, color: Colors.black87),
-             textAlign: TextAlign.center,
+              textAlign: TextAlign.center,
              ),
-             SizedBox(height: 8.0),
-             SignInButton(
+            SizedBox(height: 8.0),
+            SignInButton(
               text: 'Go anonymouse',
               textColor: Colors.black,
               color: Colors.lime[300],
