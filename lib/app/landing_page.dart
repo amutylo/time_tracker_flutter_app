@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:time_tracker_flutter_app/app/home_page.dart';
 import 'package:time_tracker_flutter_app/app/sign_in/sign_in_page.dart';
 
 class LandingPage extends StatefulWidget {
@@ -24,6 +25,6 @@ class _LandingPageState extends State<LandingPage> {
         onSignIn: _updateUser, // same as (user) => _updateUser(user),
       );
     }
-    return Container(); // temp placeholder for HomePage;
+    return HomePage(); // temp placeholder for HomePage;
   }
 }
