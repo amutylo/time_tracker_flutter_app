@@ -25,6 +25,8 @@ class _LandingPageState extends State<LandingPage> {
         onSignIn: _updateUser, // same as (user) => _updateUser(user),
       );
     }
-    return HomePage(); // temp placeholder for HomePage;
+    return HomePage(
+      onSignOut: () => _updateUser(null),
+      ); // temp placeholder for HomePage;
   }
 }
