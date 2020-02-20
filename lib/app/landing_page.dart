@@ -21,6 +21,7 @@ class _LandingPageState extends State<LandingPage> {
     // initialization on page created.
     super.initState();
     _checkCurrentUser();
+
   }
 
   Future<void> _checkCurrentUser() async {
