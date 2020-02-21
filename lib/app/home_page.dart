@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:time_tracker_flutter_app/services/auth.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,6 +9,8 @@ class HomePage extends StatelessWidget {
 
   Future<void> _signOut() async {
     try {
+      final googleSignIn = GoogleSignIn();
+      await googleSignIn.signOut();
       await auth.signOut();
     } catch (e) {
       print(e.toString());
