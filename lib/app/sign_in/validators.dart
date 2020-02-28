@@ -6,11 +6,13 @@ abstract class StringValidator {
 class NonEmptyStringValidator implements StringValidator {
   @override
   bool isValid(String value) {
-    return value.isEmpty;
+    return !value.isEmpty;
   }
 }
 
 class EmailAndPasswordValidators {
   final StringValidator emailValidator = NonEmptyStringValidator();
   final StringValidator passwordValidator = NonEmptyStringValidator();
+  final String invalidEmailErrorText = 'Email can not be empty.';
+  final String invalidPasswordErrorText = 'Password can not be empty.';
 }
