@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:time_tracker_flutter_app/app/sign_in/validators.dart';
 import 'package:time_tracker_flutter_app/common_widgets/form_submit_button.dart';
 import 'package:time_tracker_flutter_app/services/auth.dart';
 
 enum EmailSignInFormType { signIn, register }
 
-class EmailSignInForm extends StatefulWidget {
+class EmailSignInForm extends StatefulWidget with EmailAndPasswordValidators {
   final AuthBase auth;
 
-  const EmailSignInForm({@required this.auth});
+  EmailSignInForm({@required this.auth});
 
   @override
   _EmailSignInFormState createState() => _EmailSignInFormState();
@@ -58,6 +59,9 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     final secondaryText = _formType == EmailSignInFormType.signIn ?
       'Need an account? Register' : 'Have an account? Sign in';
 
+    bool submitEnable = widget.emailValidator.isValid(_email) &&
+    widget.passwordValidator.isValid(_password);
+
     return [
       _buildEmailTextField(),
       SizedBox(height: 8.0),
@@ -65,7 +69,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       SizedBox(height: 8.0),
       FormSubmitButton(
         text: primaryText,
-        onPressed: _submit
+        onPressed: submitEnable ? _submit : null,
       ),
       SizedBox(height: 8.0),
       FlatButton(
@@ -84,6 +88,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       ),
       obscureText: true,
       textInputAction: TextInputAction.done,
+      onChanged: (password) => _updateState(),
       onEditingComplete: _submit,
     );
   }
@@ -99,6 +104,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       autocorrect: false,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
+      onChanged: (email) => _updateState(),
       onEditingComplete: _emailEditingComplete,
     );
   }
@@ -115,4 +121,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     );
   }
 
+  _updateState() {
+    setState(() {});
+  }
 }
