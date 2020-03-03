@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_app/app/sign_in/email_sign_in_page.dart';
 import 'package:time_tracker_flutter_app/app/sign_in/sign_in_button.dart';
 import 'package:time_tracker_flutter_app/app/sign_in/social_sign_in_button.dart';
-import 'package:time_tracker_flutter_app/services/auth.dart';
+import 'package:time_tracker_flutter_app/services/auth_provider.dart';
 
 class SignInPage extends StatelessWidget {
-  SignInPage({@required this.auth});
-  final AuthBase auth;
 
-  Future<void> _signInAnonymously() async {
+  Future<void> _signInAnonymously(context) async {
     try {
-      await auth.signInAnonymously();
+    final auth = AuthProvider.of(context);     
+     await auth.signInAnonymously();
     } catch (e) {
       print(e.toString());
     }
   }
 
-  Future<void> _signInWithGoogle() async {
+  Future<void> _signInWithGoogle(context) async {
     try {
+      final auth = AuthProvider.of(context); 
       await auth.signInWithGoogle();
     } catch (e) {
       print(e.toString());
@@ -25,6 +25,7 @@ class SignInPage extends StatelessWidget {
   }
 
   void _sighInWithEmail(BuildContext context) {
+    final auth = AuthProvider.of(context); 
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         fullscreenDialog: true,
@@ -68,7 +69,7 @@ class SignInPage extends StatelessWidget {
               text: 'Sign in with Google',
               textColor: Colors.black87,
               color: Colors.white,
-              onPressed: _signInWithGoogle,
+              onPressed: () => _signInWithGoogle(context),
             ),
             SizedBox(height: 8.0),
             SocialSignInButton(
@@ -96,7 +97,7 @@ class SignInPage extends StatelessWidget {
               text: 'Go anonymouse',
               textColor: Colors.black,
               color: Colors.lime[300],
-              onPressed: _signInAnonymously,
+              onPressed: () => _signInAnonymously(context),
             ),
           ],
         ),

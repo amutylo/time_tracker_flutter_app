@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
       defaultActionText: 'Logout'
     ).show(context);
     if (didRequestSignOut == true) {
-      _signOut();
+      _signOut(context);
     }
   }
 
