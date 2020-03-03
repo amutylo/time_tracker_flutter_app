@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:time_tracker_flutter_app/common_widgets/platform_alert_dialog.dart';
 import 'package:time_tracker_flutter_app/services/auth.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,6 +17,18 @@ class HomePage extends StatelessWidget {
       print(e.toString());
     }
   }
+
+  Future<void> _confirmSignOut(BuildContext context) async {
+    final didRequestSignOut = await PlatformAlertDialog(
+      title: 'Logout',
+      content: 'Are you sure to logout?',
+      defaultActionText: 'Logout'
+    ).show(context);
+    if (didRequestSignOut == true) {
+      _signOut();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +43,7 @@ class HomePage extends StatelessWidget {
                 color: Colors.white,
               )
             ),
-            onPressed: _signOut
+            onPressed: () => _confirmSignOut(context)
           )
         ],
       ),
