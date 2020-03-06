@@ -81,14 +81,14 @@ class SignInPage extends StatelessWidget {
               onPressed: () => _signInWithGoogle(context),
             ),
             SizedBox(height: 8.0),
-            SocialSignInButton(
-              assetName: 'images/facebook-logo.png',
-              text: 'Sign in with Facebook',
-              textColor: Colors.white,
-              color: Color(0xFF334D92),
-              onPressed: () => _signInWithFacebook(context),
-            ),
-            SizedBox(height: 8.0),
+            // SocialSignInButton(
+            //   assetName: 'images/facebook-logo.png',
+            //   text: 'Sign in with Facebook',
+            //   textColor: Colors.white,
+            //   color: Color(0xFF334D92),
+            //   onPressed: () => _signInWithFacebook(context),
+            // ),
+            // SizedBox(height: 8.0),
             SignInButton(
               text: 'Sign in with email',
               textColor: Colors.white,
