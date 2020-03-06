@@ -13,7 +13,7 @@ abstract class AuthBase {
   Future<User> currentUser();
   Future<User> signInAnonymously();
   Future<User> signInWithGoogle();
-  Future<User> signInWithFacebook();
+  // Future<User> signInWithFacebook();
   Future<User> signInWithEmailAndPassword(String email, String password);
   Future<User> createUserEmailAndPassword(String email, String password);
   Future<void> signOut();
@@ -90,8 +90,8 @@ class Auth implements AuthBase {
   }
 
 
-  @override
-  Future<User> signInWithFacebook() async {
+  // @override
+  // Future<User> signInWithFacebook() async {
     // Not working yet, issues with the FacebookLogin package
 //    final facebookLogin = FacebookLogin();
 //    final result = await facebookLogin.logInWithReadPermissions(
@@ -110,7 +110,7 @@ class Auth implements AuthBase {
 //        message: 'Sign in aborted by user',
 //      );
 //    }
-  }
+  // }
 
   @override
   Future<void> signOut() async {

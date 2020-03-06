@@ -50,7 +50,7 @@ class _SignInPageState extends State<SignInPage> {
     }
   }
 
-  Future<void> _signInWithFacebook(BuildContext context) async {
+  // Future<void> _signInWithFacebook(BuildContext context) async {
 //    try {
 //      setState(() => _isLoading = true);
 //      final auth = AuthProvider.of(context);
@@ -62,7 +62,7 @@ class _SignInPageState extends State<SignInPage> {
 //    } finally {
 //      setState(() => _isLoading = false);
 //    }
-  }
+  // }
 
   void _sighInWithEmail(BuildContext context) {
     Navigator.of(context).push(
