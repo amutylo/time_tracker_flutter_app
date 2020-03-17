@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker_flutter_app/app/sign_in/email_sign_in_bloc.dart';
+import 'package:time_tracker_flutter_app/app/sign_in/email_sign_in_model.dart';
 import 'package:time_tracker_flutter_app/app/sign_in/validators.dart';
 import 'package:time_tracker_flutter_app/common_widgets/form_submit_button.dart';
 import 'package:time_tracker_flutter_app/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_app/services/auth.dart';
 import 'package:flutter/services.dart';
 
-enum EmailSignInFormType { signIn, register }
+class EmailSignInFormBlocBased extends StatefulWidget with EmailAndPasswordValidators {
+  EmailSignInFormBlocBased({@required this.bloc});
+  final EmailSignInBloc bloc;
 
-class EmailSignInForm extends StatefulWidget with EmailAndPasswordValidators {
+  static Widget create(BuildContext context) {
+    final AuthBase auth = Provider.of<AuthBase>(context);
+    return Provider<EmailSignInBloc>(
+      create: (context) => EmailSignInBloc(auth: auth),
+      dispose: (context, bloc) => bloc.dispose(),
+      child: Consumer<EmailSignInBloc>(
+        builder: (context, bloc, _) => EmailSignInFormBlocBased(bloc: bloc),
+      ),
+    );
+  }
 
   @override
-  _EmailSignInFormState createState() => _EmailSignInFormState();
+  _EmailSignInFormBlocBasedState createState() => _EmailSignInFormBlocBasedState();
 }
-class _EmailSignInFormState extends State<EmailSignInForm> {
+
+class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -37,7 +51,7 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
     super.dispose();
   }
 
-  void _submit() async {
+  Future<void> _submit() async {
     setState(() {
       _submitted = true;
       _isLoading = true;
@@ -146,13 +160,19 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: _buildChildren(),
-      ),
+    return StreamBuilder<EmailSignInModel>(
+      stream: widget.bloc.modelStream,
+      initialData: EmailSignInModel(),
+      builder: (context, snapshot) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: _buildChildren(),
+          ),
+        ),
+      },
     );
   }
 
